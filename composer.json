@@ -1,0 +1,12 @@
+{
+    "name": "bermudaphp/arrayable",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Bermuda\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">= 7.2.0"
+    }
+}
