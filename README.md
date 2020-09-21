@@ -1,4 +1,4 @@
 # Install
 ```bash
-composer require bermudaphp\arrayable
+composer require bermudaphp/arrayable
 ````
