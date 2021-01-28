@@ -20,8 +20,8 @@ final class Arr
      */
     public static function pull(array &$array, $offset, $default = null)
     {
-        $value = $array['offset'] ?? $default;
-        unset($array['offset']);
+        $value = $array[$offset] ?? $default;
+        unset($array[$offset]);
         
         return $value;
     }
