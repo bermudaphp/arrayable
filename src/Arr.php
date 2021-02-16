@@ -47,6 +47,37 @@ final class Arr
     }
 
     /**
+     * @param string $subject
+     * @param string $separator
+     * @param int|null $limit
+     * @return array
+     */
+    public static function explode(string $subject, string $separator, ?int $limit = null): array
+    {
+        return explode($separator, $subject, $limit);
+    }
+
+    /**
+     * @param array $array
+     * @param callable $callback
+     * @return array
+     */
+    public static function map(array $array, callable $callback): array
+    {
+        return array_map($callback, $array);
+    }
+
+    /**
+     * @param array $array
+     * @param callable $callback
+     * @return array
+     */
+    public static function filter(array $array, callable $callback): array
+    {
+        return array_filter($array, $callback, ARRAY_FILTER_USE_BOTH);
+    }
+
+    /**
      * @param array $array
      * @param string|string[] $offsets
      * @return array
