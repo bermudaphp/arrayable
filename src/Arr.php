@@ -35,7 +35,8 @@ final class Arr
     {
         $only = [];
         
-        foreach ((array) $offsets as $offset)
+        foreach (is_array($offsets)
+                     ? $offsets : [$offsets] as $offset)
         {
             if (array_key_exists($offset, $array))
             {
@@ -44,6 +45,22 @@ final class Arr
         }
         
         return $only;
+    }
+
+    /**
+     * @param array $array
+     * @param string|string[] $offsets
+     * @return array
+     */
+    public static function remove(array $array, $offsets): array
+    {
+        foreach (is_array($offsets) 
+                     ? $offsets : [$offsets] as $offset)
+        {
+            unset($array[$offset]);
+        }
+        
+        return $array;
     }
 
     /**
@@ -84,7 +101,8 @@ final class Arr
      */
     public static function except(array $array, $offsets): array
     {
-        foreach ((array) $offsets as $offset)
+        foreach (is_array($offsets)
+                     ? $offsets : [$offsets] as $offset)
         {
             unset($array[$offset]);
         }
