@@ -50,17 +50,15 @@ final class Arr
     /**
      * @param array $array
      * @param string|string[] $offsets
-     * @return array
+     * @return void
      */
-    public static function remove(array $array, $offsets): array
+    public static function remove(array &$array, $offsets): void
     {
-        foreach (is_array($offsets) 
+        foreach (is_array($offsets)
                      ? $offsets : [$offsets] as $offset)
         {
             unset($array[$offset]);
         }
-        
-        return $array;
     }
 
     /**
