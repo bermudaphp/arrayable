@@ -52,13 +52,15 @@ final class Arr
      * @param string|string[] $offsets
      * @return void
      */
-    public static function remove(array &$array, $offsets): void
+    public static function remove(array &$array, $offsets): array
     {
         foreach (is_array($offsets)
                      ? $offsets : [$offsets] as $offset)
         {
             unset($array[$offset]);
         }
+
+        return $array;
     }
 
     /**
