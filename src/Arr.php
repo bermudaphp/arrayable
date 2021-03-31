@@ -50,7 +50,7 @@ final class Arr
     /**
      * @param array $array
      * @param string|string[] $offsets
-     * @return void
+     * @return array
      */
     public static function remove(array &$array, $offsets): array
     {
