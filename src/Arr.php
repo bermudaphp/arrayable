@@ -11,6 +11,27 @@ final class Arr
     private function __construct()
     {
     }
+    
+    /**
+     * @param $var
+     * @return array
+     */
+    public static function toArray($var): array
+    {
+        if (is_array($var)) {
+            return $var;
+        }
+
+        if ($var instanceof Arrayable) {
+            return $var->toArray();
+        }
+
+        if (is_iterable($var)) {
+            return iterator_to_array($var);
+        }
+
+        return [$var];
+    }
 
     /**
      * @param array $array
@@ -25,26 +46,37 @@ final class Arr
         
         return $value;
     }
+    
+    /**
+     * @param array $array
+     * @param string[] $offsets
+     * @param null $default
+     * @return array
+     */
+    public static function pullAll(array &$array, array $offsets, $default = null): array
+    {
+        $vars = [];
+        foreach($offsets as $offset) {
+            $vars[$offset] = self::pull($array, $offset, is_array($default) ? $default[$offset] ?? null : $default);
+        }
+        
+        return $vars;
+    } 
 
     /**
      * @param array $array
      * @param string|string[] $offsets
      * @return array
      */
-    public static function only(array $array, $offsets): array
+    public static function only(array $array, string|array $offsets): array
     {
-        $only = [];
-        
-        foreach (is_array($offsets)
-                     ? $offsets : [$offsets] as $offset)
-        {
-            if (array_key_exists($offset, $array))
-            {
+        foreach (self::toArray($offsets) as $offset) {
+            if (array_key_exists($offset, $array)) {
                 $only[$offset] = $array[$offset];
             }
         }
         
-        return $only;
+        return $only ?? [];
     }
 
     /**
@@ -52,11 +84,9 @@ final class Arr
      * @param string|string[] $offsets
      * @return array
      */
-    public static function remove(array &$array, $offsets): array
+    public static function remove(array &$array, string|array $offsets): array
     {
-        foreach (is_array($offsets)
-                     ? $offsets : [$offsets] as $offset)
-        {
+        foreach (self::toArray($offsets) as $offset) {
             unset($array[$offset]);
         }
 
@@ -69,7 +99,7 @@ final class Arr
      * @param int|null $limit
      * @return array
      */
-    public static function explode(string $subject, string $separator, ?int $limit = null): array
+    public static function explode(string $subject, string $separator = ',', ?int $limit = null): array
     {
         return explode($separator, $subject, $limit);
     }
@@ -79,9 +109,9 @@ final class Arr
      * @param callable $callback
      * @return array
      */
-    public static function map(array $array, callable $callback): array
+    public static function map(array &$array, callable $callback): array
     {
-        return array_map($callback, $array);
+        return $array = array_map($callback, $array);
     }
 
     /**
@@ -89,9 +119,9 @@ final class Arr
      * @param callable $callback
      * @return array
      */
-    public static function filter(array $array, callable $callback): array
+    public static function filter(array &$array, callable $callback): array
     {
-        return array_filter($array, $callback, ARRAY_FILTER_USE_BOTH);
+        return $array = array_filter($array, $callback, ARRAY_FILTER_USE_BOTH);
     }
 
     /**
@@ -99,14 +129,8 @@ final class Arr
      * @param string|string[] $offsets
      * @return array
      */
-    public static function except(array $array, $offsets): array
+    public static function except(array $array, string|array $offsets): array
     {
-        foreach (is_array($offsets)
-                     ? $offsets : [$offsets] as $offset)
-        {
-            unset($array[$offset]);
-        }
-
-        return $array;
+        return self::remove($array, $offsets);
     }
 }
