@@ -65,10 +65,10 @@ function array_key_exists(array|\ArrayAccess $accessible, int|string $key): bool
 
 /**
  * @param array|\ArrayAccess $accessible
- * @param string|string[] $offsets
+ * @param string|int|int[]|string[] $offsets
  * @return array
  */
-function array_only(array|\ArrayAccess $accessible, string|array $offsets): array
+function array_only(array|\ArrayAccess $accessible, string|int|array $offsets): array
 {
     foreach (to_array($offsets) as $offset) {
         if (array_key_exists($offset, $array)) {
@@ -81,10 +81,10 @@ function array_only(array|\ArrayAccess $accessible, string|array $offsets): arra
 
 /**
  * @param array|\ArrayAccess $accessible
- * @param string|string[] $offsets
+ * @param string|int|int[]|string[] $offsets
  * @return array|\ArrayAccess
  */
-function array_remove(array|\ArrayAccess &$accessible, string|array $offsets): array|\ArrayAccess
+function array_remove(array|\ArrayAccess &$accessible, string|int|array $offsets): array|\ArrayAccess
 {
     foreach (to_array($offsets) as $offset) {
         unset($accessible[$offset]);
@@ -126,10 +126,10 @@ function array_filter(array &$array, callable $callback): array
 
 /**
  * @param array|\ArrayAccess $accessible
- * @param string|string[] $offsets
+ * @param string|int|int[]|string[] $offsets
  * @return array|\ArrayAccess
  */
-function array_except(array|\ArrayAccess $accessible, string|array $offsets): array|\ArrayAccess
+function array_except(array|\ArrayAccess $accessible, string|int|array $offsets): array|\ArrayAccess
 {
     if ($accessible instanceof \ArrayAccess) {
         $accessible = clone $accessible;
