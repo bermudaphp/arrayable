@@ -17,9 +17,9 @@ final class Arr
      * @param array|\ArrayAccess $accessible
      * @param $offset
      * @param null $default
-     * @return mixed|null
+     * @return mixed
      */
-    public static function pull(array|\ArrayAccess &$accessible, $offset, $default = null)
+    public static function pull(array|\ArrayAccess &$accessible, $offset, $default = null): mixed
     {
         $value = $array[$offset] ?? $default;
         unset($array[$offset]);
@@ -107,9 +107,9 @@ final class Arr
     /**
      * @param array|\ArrayAccess $accessible
      * @param string|int|string[]|int[] $offsets
-     * @return array|ArrayAccess
+     * @return array|\ArrayAccess
      */
-    public static function except(array|\ArrayAccess $accessible, string|int|array $offsets): array|ArrayAccess
+    public static function except(array|\ArrayAccess $accessible, string|int|array $offsets): array|\ArrayAccess
     {
         return self::remove($array, $offsets);
     }
