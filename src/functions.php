@@ -137,3 +137,29 @@ function array_except(array|\ArrayAccess $accessible, string|int|array $offsets)
 
     return array_remove($accessible, $offsets);
 }
+
+/**
+ * @param array $array
+ * @return mixed
+ */
+function array_end(array $array): mixed
+{
+    if ($array === []) {
+        throw new \RuntimeException('Array is empty');
+    }
+    
+    return end($array);
+}
+
+/**
+ * @param array $array
+ * @return mixed
+ */
+function array_start(array $array): mixed
+{
+    if ($array === []) {
+        throw new \RuntimeException('Array is empty');
+    }
+    
+    return reset($array);
+}
