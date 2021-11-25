@@ -24,12 +24,12 @@ function to_array($var): array
 }
 
 /**
- * @param array|\ArrayAccess $array
+ * @param array|\ArrayAccess $accessible
  * @param string|int $offset
  * @param null $default
  * @return mixed
  */
-function array_pull(array|\ArrayAccess &$array, string|int $offset, $default = null): mixed
+function array_pull(array|\ArrayAccess &$accessible, string|int $offset, $default = null): mixed
 {
     $value = $array[$offset] ?? $default;
     unset($array[$offset]);
@@ -38,12 +38,12 @@ function array_pull(array|\ArrayAccess &$array, string|int $offset, $default = n
 }
 
 /**
- * @param array|\ArrayAccess $array
+ * @param array|\ArrayAccess $accessible
  * @param string[]|int[] $offsets
  * @param null $default
  * @return array
  */
-function array_pull_all(array|\ArrayAccess &$array, array $offsets, $default = null): array
+function array_pull_all(array|\ArrayAccess &$accessible, array $offsets, $default = null): array
 {
     $vars = [];
     foreach($offsets as $offset) {
@@ -64,11 +64,11 @@ function array_key_exists(array|\ArrayAccess $accessible, int|string $key): bool
 }
 
 /**
- * @param array|\ArrayAccess $array
+ * @param array|\ArrayAccess $accessible
  * @param string|string[] $offsets
  * @return array
  */
-function array_only(array|\ArrayAccess $array, string|array $offsets): array
+function array_only(array|\ArrayAccess $accessible, string|array $offsets): array
 {
     foreach (to_array($offsets) as $offset) {
         if (array_key_exists($offset, $array)) {
