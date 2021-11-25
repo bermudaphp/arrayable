@@ -31,7 +31,7 @@ function to_array($var): array
  */
 function array_pull(array|\ArrayAccess &$accessible, string|int $offset, $default = null): mixed
 {
-    $value = $array[$offset] ?? $default;
+    $value = $accessible[$offset] ?? $default;
     unset($array[$offset]);
 
     return $value;
@@ -47,7 +47,7 @@ function array_pull_all(array|\ArrayAccess &$accessible, array $offsets, $defaul
 {
     $vars = [];
     foreach($offsets as $offset) {
-        $vars[$offset] = array_pull($array, $offset, is_array($default) ? $default[$offset] ?? null : $default);
+        $vars[$offset] = array_pull($accessible, $offset, is_array($default) ? $default[$offset] ?? null : $default);
     }
 
     return $vars;
@@ -71,8 +71,8 @@ function array_key_exists(array|\ArrayAccess $accessible, int|string $key): bool
 function array_only(array|\ArrayAccess $accessible, string|int|array $offsets): array
 {
     foreach (to_array($offsets) as $offset) {
-        if (array_key_exists($offset, $array)) {
-            $only[$offset] = $array[$offset];
+        if (array_key_exists($offset, $accessible)) {
+            $only[$offset] = $accessible[$offset];
         }
     }
 
