@@ -71,7 +71,7 @@ function array_key_exists(array|\ArrayAccess $accessible, int|string $key): bool
 function array_only(array|\ArrayAccess $accessible, string|int|array $offsets): array
 {
     foreach (to_array($offsets) as $offset) {
-        if (array_key_exists($offset, $accessible)) {
+        if (array_key_exists($accessible, $offset)) {
             $only[$offset] = $accessible[$offset];
         }
     }
