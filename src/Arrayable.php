@@ -2,10 +2,6 @@
 
 namespace Bermuda;
 
-/**
- * Interface Arrayable
- * @package Bermuda
- */
 interface Arrayable
 {
     /**
