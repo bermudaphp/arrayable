@@ -1,6 +1,6 @@
 <?php
 
-namespace Bermuda;
+namespace Bermuda\Stdlib;
 
 interface Arrayable
 {
