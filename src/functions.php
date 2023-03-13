@@ -2,12 +2,14 @@
 
 namespace Bermuda\Stdlib;
 
-function to_array(iterable|object $arrayable): array
+function to_array(mixed $var): array
 {
-    if ($arrayable instanceof Arrayable) return $arrayable->toArray();
-    if ($arrayable instanceof \IteratorAggregate) return \iterator_to_array($arrayable->getIterator());
-    if ($arrayable instanceof \Iterator) return \iterator_to_array($arrayable);
-    if (is_array($arrayable)) return $arrayable;
-
-    return \get_object_vars($arrayable);
+    if ($var instanceof Arrayable) return $var->toArray();
+    if ($var instanceof \IteratorAggregate) return \iterator_to_array($var->getIterator());
+    if ($var instanceof \Iterator) return \iterator_to_array($var);
+    if (is_object($var)) return \get_object_vars($var);
+    if (is_array($var)) return $var;
+    if ($var === null) return [];
+    
+    return [$var];
 }
