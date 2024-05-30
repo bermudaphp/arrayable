@@ -13,3 +13,8 @@ function to_array(mixed $var): array
     
     return [$var];
 }
+
+function array_last(array $array): mixed
+{
+    return $array[\array_key_last($array)];
+}
