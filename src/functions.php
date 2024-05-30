@@ -18,3 +18,11 @@ function array_last(array $array): mixed
 {
     return $array[\array_key_last($array)];
 }
+
+function array_pull(array &$array, int|string $offset): mixed
+{
+    $value = $array[$offset] ?? null;
+    unset($array[$offset]);
+
+    return $value;
+}
